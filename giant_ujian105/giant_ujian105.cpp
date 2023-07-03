@@ -2,12 +2,11 @@
 using namespace std;
 
 class MataKuliah {
-private:
+public:
 	float presensi;
 	float activity;
 	float exercise;
 	float ujianAkhir;
-	float x;
 
 public:
 	MataKuliah() {
@@ -15,10 +14,9 @@ public:
 		activity = 0;
 		exercise = 0;
 		ujianAkhir = 0;
-		x = 0;
 	}
 
-	virtual float hitungNilaiAkhir(int a) { return 0; }
+	virtual float hitungNilaiAkhir() { return 0; }
 	virtual void cekKelulusan() {}
 	virtual void input() {}
 
@@ -70,38 +68,34 @@ public:
 class Pemrograman : public MataKuliah {
 public:
 	void input() {
-		float presen;
-		float activ;
-		float exer;
-		float ua;
 
 		cout << "\nMasukkan nilai Presensi : ";
-		cin >> presen;
-		setP(presen);
+		cin >> presensi;
 
 		cout << "\nMasukkan nilai Activity : ";
-		cin >> activ;
-		setA(activ);
+		cin >> activity;
 
 		cout << "\nMasukkan nilai Exercise : ";
-		cin >> exer;
-		setE(exer);
+		cin >> exercise;
 
 		cout << "\nMasukkan nilai Ujian Akhir : ";
-		cin >> ua;
-		setUA(ua);
+		cin >> ujianAkhir;
 	}
 
-	float hitungNilaiAkhir(float presen, float activ, float exer, float ua) {
-		return (presen * 10 / 100) + (activ * 20 / 100) + (exer * 30 / 100) + (ua * 40 / 100);
+	float hitungNilaiAkhir() {
+		return (presensi * 0.1) + (activity * 0.2) + (exercise * 0.3) + (ujianAkhir * 0.4);
 	}
 
-	/*
-	void cekKelulusan(float presen, float activ, float exer, float ua) {
-		if ((presen * 10 / 100) + (activ * 20 / 100) + (exer * 30 / 100) + (ua * 40 / 100) >= 75) {
-			cout << "SELAMAT ANDA LULUS";
+	
+	void cekKelulusan() {
+		if (hitungNilaiAkhir() >= 75) {
+			cout << "Selamat Anda Lulus";
 		}
-	}*/
+
+		else {
+			cout << "Mohon maaf anda tidak lulus";
+		}
+	}
 };
 
 int main() {
@@ -122,8 +116,8 @@ int main() {
 		mk->input();
 
 		cout << "\n====================================================\n";
-		cout << "Nilai Akhir Anda Adalah : " << mk->hitungNilaiAkhir(mk->getP())<< endl;
-		cout << "Status Kelulusan : " << endl;
+		cout << "Nilai Akhir Anda Adalah : " << mk->hitungNilaiAkhir()<< endl;
+		mk->cekKelulusan();
 		cout << "====================================================";
 
 
